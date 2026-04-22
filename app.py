@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Configuración de la IA con la llave que pusiste en Render
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-model = genai.GenerativeModel('models/gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 # Instrucciones para que la IA sepa qué es Okama
 SYSTEM_INSTRUCTION = (
