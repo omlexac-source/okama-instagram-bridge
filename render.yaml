@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: okama-instagram-bridge
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+    envVars:
+      - key: WHATSAPP_PHONE_NUMBER_ID
+        value: 068769399658514
+      - key: WHATSAPP_ACCESS_TOKEN
+        value: EAAYJCs8FM18BRb135Oa6sSUsTna4rqvMvUur5WY76HY7wfLUFZBUNp39uNrjsayz9E1SOvIsqdJMh3ZBWAwm1rUswwxXXUadRasMod9NgnqL93xT9IuX51hvheRRtNgavCZAozv4cKPQrdlmlYbnnVWEVfKtuHYNCFReeiyGoM0ZCsD5FXZBmpYEQ792qLEwrUDmPAM3WQUIUcEecjZB5ob92PcOAEg4EcR5qzVQBBWh2PXL2XEFbwpPL2ANcDYShOa1p6JgggXFT3ZAM9CGT3T7u4z
+      - key: WHATSAPP_APP_SECRET
+        value: 9a4dae607d62dc135e2abcac1b22c679
+      - key: WHATSAPP_VERIFY_TOKEN
+        value: okama_webhook_verify_2024_secure
+      - key: AUTHORIZED_PHONE_NUMBER
+        value: +524441774608
+      - key: INSTAGRAM_USER_ID
+        sync: false
+      - key: INSTAGRAM_ACCESS_TOKEN
+        sync: false
+      - key: AUTO_REPLY
+        value: "true"
