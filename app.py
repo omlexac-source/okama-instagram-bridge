@@ -5,11 +5,10 @@ import requests
 
 app = Flask(__name__)
 
-# Configuración de la IA con la llave que pusiste en Render
+# Configuración de la IA
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
-# Instrucciones para que la IA sepa qué es Okama
+# INSTRUCCIONES DE OKAMA
 SYSTEM_INSTRUCTION = (
     "Eres el asistente oficial de Okama, un negocio en San Luis Potosí. "
     "Vendes playeras personalizadas, tote bags, cuadros de aluminio, stickers y vinil. "
@@ -31,14 +30,13 @@ def webhook():
             user_number = message['from']
             user_text = message['text']['body']
             
-            # La IA genera la respuesta
-            chat = model.start_chat(history=[])
-            response = chat.send_message(f"{SYSTEM_INSTRUCTION}\n\nCliente: {user_text}")
+            # Usamos el modelo con el nombre corregido
+            model = genai.GenerativeModel('gemini-1.5-flash')
+            response = model.generate_content(f"{SYSTEM_INSTRUCTION}\n\nCliente: {user_text}")
             
-            # Enviamos la respuesta de regreso a WhatsApp
             send_whatsapp_message(user_number, response.text)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error detectado: {e}")
         
     return "EVENT_RECEIVED", 200
 
